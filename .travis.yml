@@ -25,6 +25,6 @@ script:
 
 deploy:
   provider: script
-  script: bash scripts/deploy.sh $GIT_REVISION
+  script: bash ./deploy.sh $GIT_REVISION
   on:
     branch: master
