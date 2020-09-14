@@ -1,13 +1,14 @@
 echo "Running deploy.sh"
 
-if [ ! -f rev.txt ]; then
-    echo "Unable to find rev.txt in the current directory"
+if [ "$#" -ne 1 ]; then
+    echo "deploy.sh: Missing git revision"
     exit 1
 fi
 
-exit 0
-# GIT_REVISION=`cat rev.txt`
-# echo "Git revision during deployment phase is $GIT_REVISION"
+GIT_REVISION=$1
+
+
+echo "Git revision during deployment phase is '$GIT_REVISION'"
 
 # docker build -t tarof429/multi-client -t tarof429/multi-client-$GIT_REVISION -f ./client/Dockerfile ./client
 # docker build -t tarof429/multi-server -t tarof429/multi-server-$GIT_REVISION -f ./server/Dockerfile ./server
