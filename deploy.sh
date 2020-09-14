@@ -7,6 +7,7 @@ if [ ! -f rev.txt ]; then
     exit 1
 fi
 
+exit 0
 # GIT_REVISION=`cat rev.txt`
 # echo "Git revision during deployment phase is $GIT_REVISION"
 
