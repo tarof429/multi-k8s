@@ -1,5 +1,3 @@
-#!/bin/bash -x
-
 echo "Running deploy.sh"
 
 if [ ! -f rev.txt ]; then
