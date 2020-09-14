@@ -1,4 +1,11 @@
-#!/bin/sh
+#!/bin/bash -x
+
+echo "Running deploy.sh"
+
+if [ ! -f rev.txt ]; then
+    echo "Unable to find rev.txt in the current directory"
+    exit 1
+fi
 
 GIT_REVISION=`cat rev.txt`
 echo "Git revision during deployment phase is $GIT_REVISION"
