@@ -2,14 +2,16 @@ sudo: required
 language: generic
 services:
   - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
-  - GIT_REVISION=`git rev-parse HEAD`
-  - echo "Building revision $GIT_REVISION"
-  - export GIT_REVISION
+  - echo "Building revision $SHA"
   # Decrypt the Gcloud service account file
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   # Download and install the Google cloud SDK
-  - export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash
+  - curl https://sdk.cloud.google.com | bash
   - source $HOME/google-cloud-sdk/path.bash.inc
   # Configure the SDK with our Gcloud auth info
   - gcloud components update kubectl
@@ -25,6 +27,6 @@ script:
 
 deploy:
   provider: script
-  script: bash ./deploy.sh $GIT_REVISION
+  script: bash ./deploy.sh
   on:
     branch: master
