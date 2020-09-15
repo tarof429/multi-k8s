@@ -5,11 +5,15 @@ echo "Git revision during deployment phase is '$SHA'"
 docker build -t tarof429/multi-client:latest -t tarof429/multi-client:$SHA -f ./client/Dockerfile ./client
 docker build -t tarof429/multi-server:latest -t tarof429/multi-server:$SHA -f ./server/Dockerfile ./server
 docker build -t tarof429/multi-worker:latest -t tarof429/multi-worker:$SHA -f ./worker/Dockerfile ./worker
-# docker push tarof429/multi-client 
-# docker push tarof429/multi-client-$GIT_REVISION 
-# docker push tarof429/multi-server
-# docker push tarof429/multi-server-$GIT_REVISION 
-# docker push tarof429/multi-worker
-# docker push tarof429/multi-worker-$GIT_REVISION 
-# kubectl apply -f k8s
-# kubectl set image deployments/server-deployment server=tarof429/multi-server-$GIT_REVISION
+
+docker push tarof429/multi-client:latest
+docker push tarof429/multi-client:$SHA 
+docker push tarof429/multi-server:latest
+docker push tarof429/multi-server:$SHA
+docker push tarof429/multi-worker:latest
+docker push tarof429/multi-worker:$SHA 
+
+kubectl apply -f k8s
+kubectl set image deployments/server-deployment server=tarof429/multi-server:$SHA
+kubectl set image deployments/client-deployment server=tarof429/multi-client:$SHA
+kubectl set image deployments/worker-deployment server=tarof429/multi-worker:$SHA
