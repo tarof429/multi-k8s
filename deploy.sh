@@ -15,5 +15,5 @@ docker push tarof429/multi-worker:$SHA
 
 kubectl apply -f k8s
 kubectl set image deployments/server-deployment server=tarof429/multi-server:$SHA
-kubectl set image deployments/client-deployment server=tarof429/multi-client:$SHA
-kubectl set image deployments/worker-deployment server=tarof429/multi-worker:$SHA
+kubectl set image deployments/client-deployment client=tarof429/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=tarof429/multi-worker:$SHA
